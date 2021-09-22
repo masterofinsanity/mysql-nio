@@ -31,16 +31,126 @@ extension FixedWidthInteger {
     }
 }
 
-extension Int: MySQLDataConvertible { }
-extension Int8: MySQLDataConvertible { }
-extension Int16: MySQLDataConvertible { }
-extension Int32: MySQLDataConvertible { }
-extension Int64: MySQLDataConvertible { }
-extension UInt: MySQLDataConvertible { }
-extension UInt8: MySQLDataConvertible { }
-extension UInt16: MySQLDataConvertible { }
-extension UInt32: MySQLDataConvertible { }
-extension UInt64: MySQLDataConvertible { }
+extension Int: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.int else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(int: self)
+    }
+}
+extension Int8: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.int8 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(int8: self)
+    }
+}
+extension Int16: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.int16 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(int16: self)
+    }
+}
+extension Int32: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.int32 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(int32: self)
+    }
+}
+extension Int64: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.int64 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(int64: self)
+    }
+}
+extension UInt: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.uint else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(uint: self)
+    }
+}
+extension UInt8: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.uint8 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(uint8: self)
+    }
+}
+extension UInt16: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.uint16 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(uint16: self)
+    }
+}
+extension UInt32: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.uint32 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(uint32: self)
+    }
+}
+extension UInt64: MySQLDataConvertible {
+    public init?(mysqlData: MySQLData) {
+        guard let int = mysqlData.uint64 else {
+            return nil
+        }
+        self = int
+    }
+
+    public var mysqlData: MySQLData? {
+        return .init(uint64: self)
+    }
+}
 
 extension String: MySQLDataConvertible {
     public init?(mysqlData: MySQLData) {

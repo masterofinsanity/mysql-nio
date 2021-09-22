@@ -56,6 +56,69 @@ public struct MySQLData: CustomStringConvertible, ExpressibleByStringLiteral, Ex
         self.buffer = buffer
     }
     
+    public init(uint int: UInt) {
+        self.format = .binary
+        self.type = .longlong
+        assert(UInt.bitWidth == 64)
+        var buffer = ByteBufferAllocator().buffer(capacity: 8)
+        buffer.writeInteger(int, endianness: .little)
+        self.isUnsigned = true
+        self.buffer = buffer
+    }
+    
+    private init<T>(type: MySQLProtocol.DataType, value: T, byteCount: Int, isUnsigned: Bool) where T: FixedWidthInteger {
+        self.format = .binary
+        self.type = type
+        var buffer = ByteBufferAllocator().buffer(capacity: byteCount)
+        buffer.writeInteger(value, endianness: .little)
+        self.isUnsigned = isUnsigned
+        self.buffer = buffer
+    }
+    private init<T>(type: MySQLProtocol.DataType, value: T) where T: FixedWidthInteger, T: SignedInteger {
+        self.format = .binary
+        self.type = type
+        self.buffer = .init(integer: value, endianness: .little)
+        self.isUnsigned = false
+    }
+    private init<T>(type: MySQLProtocol.DataType, value: T) where T: FixedWidthInteger, T: UnsignedInteger {
+        self.format = .binary
+        self.type = type
+        self.buffer = .init(integer: value, endianness: .little)
+        self.isUnsigned = true
+    }
+
+    public init(int8 int: Int8) {
+        self.init(type: .tiny, value: int)
+    }
+
+    public init(uint8 int: UInt8) {
+        self.init(type: .tiny, value: int)
+    }
+
+    public init(int16 int: Int16) {
+        self.init(type: .short, value: int)
+    }
+
+    public init(uint16 int: UInt16) {
+        self.init(type: .short, value: int)
+    }
+
+    public init(int32 int: Int32) {
+        self.init(type: .long, value: int)
+    }
+
+    public init(uint32 int: UInt32) {
+        self.init(type: .long, value: int)
+    }
+
+    public init(int64 int: Int64) {
+        self.init(type: .longlong, value: int)
+    }
+
+    public init(uint64 int: UInt64) {
+        self.init(type: .longlong, value: int)
+    }
+    
     public init(bool: Bool) {
         self.format = .binary
         self.type = .tiny
